@@ -96,6 +96,10 @@ import qualified Ide.Plugin.Fourmolu               as Fourmolu
 import qualified Ide.Plugin.Ormolu                 as Ormolu
 #endif
 
+#if testPlugin
+import qualified Ide.Plugin.TestPlugin             as TestPlugin
+#endif
+
 #if stylishHaskell
 import qualified Ide.Plugin.StylishHaskell         as StylishHaskell
 #endif
@@ -190,6 +194,9 @@ idePlugins recorder includeExamples = pluginDescToIdePlugins allPlugins
 #endif
 #if changeTypeSignature
       ChangeTypeSignature.descriptor "changeTypeSignature" :
+#endif
+#if testPlugin
+      TestPlugin.descriptor   "testPlugin" :
 #endif
     -- The ghcide descriptors should come last so that the notification handlers
     -- (which restart the Shake build) run after everything else

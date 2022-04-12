@@ -218,6 +218,11 @@ flag dynamic
   default:     True
   manual:      True
 
+flag testPlugin
+  description: Enable testPlugin plugin
+  default:     True
+  manual:      True
+
 common example-plugins
   hs-source-dirs: plugins/default/src
   other-modules: Ide.Plugin.Example,
@@ -335,6 +340,11 @@ common brittany
     build-depends: hls-brittany-plugin ^>=1.0.0.1
     cpp-options: -Dbrittany
 
+common testPlugin
+  if flag(testPlugin)
+    build-depends: hls-test-plugin ^>=1.0.0.0
+    cpp-options: -DtestPlugin
+
 executable haskell-language-server
   import:             common-deps
                     -- configuration
@@ -364,6 +374,7 @@ executable haskell-language-server
                     , ormolu
                     , stylishHaskell
                     , brittany
+                    , testPlugin
 
   main-is:          Main.hs
   hs-source-dirs:   exe
